@@ -115,26 +115,7 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('nvim-tree').setup {
-        disable_netrw = true,
-        hijack_netrw = true,
-        open_on_setup = true,
-        ignore_ft_on_setup = {},
-        auto_close = true,
-        open_on_tab = false,
-        hijack_cursor = false,
-        update_cwd = false,
-        lsp_diagnostics = false,
-        update_focused_file = {
-          enable = true,
-          update_cwd = false,
-          ignore_list = {},
-        },
-        system_open = {
-          cmd = nil,
-          args = {},
-        },
-      }
+      require('nvim-tree').setup {}
     end,
   },
 
@@ -147,9 +128,6 @@ require('lazy').setup({
       show_trailing_blankline_indent = false,
     },
   },
-
-  -- "gc" to comment visual regions/lines
-  -- { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -174,19 +152,13 @@ require('lazy').setup({
   },
 
   -- Highlight, edit, and navigate code
-  -- {
-  --   'nvim-treesitter/nvim-treesitter',
-  --   dependencies = {
-  --     'nvim-treesitter/nvim-treesitter-textobjects',
-  --   },
-  --   build = ":TSUpdate",
-  -- },
-
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    build = ":TSUpdate",
+  },
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -302,69 +274,69 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
--- require('nvim-treesitter.configs').setup {
---   -- Add languages to be installed here that you want installed for treesitter
---   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+require('nvim-treesitter.configs').setup {
+  -- Add languages to be installed here that you want installed for treesitter
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
---   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
---   auto_install = false,
+  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+  auto_install = false,
 
---   highlight = { enable = true },
---   indent = { enable = true, disable = { 'python' } },
---   incremental_selection = {
---     enable = true,
---     keymaps = {
---       init_selection = '<c-space>',
---       node_incremental = '<c-space>',
---       scope_incremental = '<c-s>',
---       node_decremental = '<M-space>',
---     },
---   },
---   textobjects = {
---     select = {
---       enable = true,
---       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
---       keymaps = {
---         -- You can use the capture groups defined in textobjects.scm
---         ['aa'] = '@parameter.outer',
---         ['ia'] = '@parameter.inner',
---         ['af'] = '@function.outer',
---         ['if'] = '@function.inner',
---         ['ac'] = '@class.outer',
---         ['ic'] = '@class.inner',
---       },
---     },
---     move = {
---       enable = true,
---       set_jumps = true, -- whether to set jumps in the jumplist
---       goto_next_start = {
---         [']m'] = '@function.outer',
---         [']]'] = '@class.outer',
---       },
---       goto_next_end = {
---         [']M'] = '@function.outer',
---         [']['] = '@class.outer',
---       },
---       goto_previous_start = {
---         ['[m'] = '@function.outer',
---         ['[['] = '@class.outer',
---       },
---       goto_previous_end = {
---         ['[M'] = '@function.outer',
---         ['[]'] = '@class.outer',
---       },
---     },
---     swap = {
---       enable = true,
---       swap_next = {
---         ['<leader>a'] = '@parameter.inner',
---       },
---       swap_previous = {
---         ['<leader>A'] = '@parameter.inner',
---       },
---     },
---   },
--- }
+  highlight = { enable = true },
+  indent = { enable = true, disable = { 'python' } },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<c-space>',
+      node_incremental = '<c-space>',
+      scope_incremental = '<c-s>',
+      node_decremental = '<M-space>',
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ['aa'] = '@parameter.outer',
+        ['ia'] = '@parameter.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        [']m'] = '@function.outer',
+        [']]'] = '@class.outer',
+      },
+      goto_next_end = {
+        [']M'] = '@function.outer',
+        [']['] = '@class.outer',
+      },
+      goto_previous_start = {
+        ['[m'] = '@function.outer',
+        ['[['] = '@class.outer',
+      },
+      goto_previous_end = {
+        ['[M'] = '@function.outer',
+        ['[]'] = '@class.outer',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<leader>a'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<leader>A'] = '@parameter.inner',
+      },
+    },
+  },
+}
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
